@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
 
 import moments from "./images/moments.png";
@@ -9,6 +10,7 @@ import useStyles from "./styles";
 
 const App = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   return (
     <Container maxwidth="lg">
