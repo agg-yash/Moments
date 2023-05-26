@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const postSchema = mongoose.Schema({
   title: String,
   message: String,
+  name: String,
   creator: String,
   tags: [String],
   selectedFile: String, // This will be a string representation of the image

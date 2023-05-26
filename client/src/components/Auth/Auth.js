@@ -15,19 +15,21 @@ import useStyles from "./styles";
 import LockedOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { signin, signup } from "../../actions/auth";
 
+const initialState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
+
 const Auth = () => {
   const classes = useStyles();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const [formData, setFormData] = useState(initialState);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignup) {
@@ -42,6 +44,7 @@ const Auth = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const switchMode = () => {
+    setFormData(initialState);
     setIsSignup((prevState) => !prevState);
     setShowPassword(false);
   };
