@@ -8,7 +8,6 @@ import Form from "../Form/Form";
 const Home = () => {
   const dispatch = useDispatch();
   const [currentId, setCurrentId] = useState(null);
-
   useEffect(() => {
     dispatch(getPosts());
   }, [currentId, dispatch]);
