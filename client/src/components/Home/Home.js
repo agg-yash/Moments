@@ -51,10 +51,10 @@ const Home = () => {
     }
   };
 
-  const handleAdd = (tag) => setTags([...tags, tag]);
-  const handleDelete = (tagToDelete) => {
-    setTags(tags.filter((tag) => tag !== tagToDelete));
-  };
+  const handleAddChip = (tag) => setTags([...tags, tag]);
+
+  const handleDeleteChip = (chipToDelete) =>
+    setTags(tags.filter((tag) => tag !== chipToDelete));
 
   return (
     <Grow in>
@@ -87,8 +87,8 @@ const Home = () => {
               <ChipInput
                 style={{ margin: "10px 0" }}
                 value={tags}
-                onAdd={handleAdd}
-                onDelete={handleDelete}
+                onAdd={(chip) => handleAddChip(chip)}
+                onDelete={(chip) => handleDeleteChip(chip)}
                 label="Search Tags"
                 variant="outlined"
               />

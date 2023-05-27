@@ -13,7 +13,9 @@ export const getPosts = () => async (dispatch) => {
 
 export const getPostsbySearch = (searchQuery) => async (dispatch) => {
   try {
-    const { data } = await api.fetchPostsbySearch(searchQuery);
+    const {
+      data: { data },
+    } = await api.fetchPostsbySearch(searchQuery);
     console.log(data);
     dispatch({ type: FETCH_ALL, payload: data });
   } catch (error) {
