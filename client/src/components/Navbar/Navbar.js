@@ -20,7 +20,7 @@ const Navbar = () => {
       if (decodedToken.exp * 1000 < new Date().getTime()) logout(); // check if token has expired
     }
     setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [location]);
+  }, [location, user?.token]);
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });
