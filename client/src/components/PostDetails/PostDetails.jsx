@@ -9,7 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { useParams, useNavigate } from "react-router-dom";
-import { getPost, getPostsBySearch } from "../../actions/posts";
+import { getPost, getPostsbySearch } from "../../actions/posts";
 import useStyles from "./styles";
 
 const PostDetails = () => {
@@ -22,6 +22,14 @@ const PostDetails = () => {
     dispatch(getPost(id));
   }, [id, dispatch]);
 
+  useEffect(() => {
+    if (post) {
+      dispatch(
+        getPostsbySearch({ search: "none", tags: post?.tags.join(",") })
+      );
+    }
+  }, [post, dispatch]);
+
   if (!post) return null;
   const openPost = (_id) => navigate(`/posts/${_id}`);
 
@@ -32,6 +40,8 @@ const PostDetails = () => {
       </Paper>
     );
   }
+
+  const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
 
   return (
     <Paper style={{ padding: "20px", borderRadius: "15px" }} elevation={6}>
@@ -76,6 +86,39 @@ const PostDetails = () => {
           />
         </div>
       </div>
+      {!!recommendedPosts.length && (
+        <div className={classes.section}>
+          <Typography gutterBottom variant="h5">
+            You might also like:
+          </Typography>
+          <Divider />
+          <div className={classes.recommendedPosts}>
+            {recommendedPosts.map(
+              ({ title, name, message, likes, selectedFile, _id }) => (
+                <div
+                  style={{ margin: "20px", cursor: "pointer" }}
+                  onClick={() => openPost(_id)}
+                  key={_id}
+                >
+                  <Typography gutterBottom variant="h6">
+                    {title}
+                  </Typography>
+                  <Typography gutterBottom variant="subtitle2">
+                    {name}
+                  </Typography>
+                  <Typography gutterBottom variant="subtitle2">
+                    {message}
+                  </Typography>
+                  <Typography gutterBottom variant="subtitle1">
+                    Likes: {likes.length}
+                  </Typography>
+                  <img src={selectedFile} width="200px" />
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      )}
     </Paper>
   );
 };
