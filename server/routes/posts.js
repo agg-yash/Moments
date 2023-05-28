@@ -8,10 +8,12 @@ import {
   deletePost,
   likePost,
   getPostsBySearch,
+  getPost,
 } from "../controllers/posts.js";
 
 router.get("/search", getPostsBySearch);
 router.get("/", getPosts);
+router.get("/:id", getPost);
 router.post("/", auth, createPost);
 router.patch("/:id", auth, updatePost);
 router.delete("/:id", auth, deletePost);
