@@ -4,20 +4,16 @@ import { useDispatch } from "react-redux";
 import { commentPost } from "../../actions/posts";
 import useStyles from "./styles";
 const CommentSection = ({ post }) => {
-  //   const user = JSON.parse(localStorage.getItem("profile"));
+  const user = JSON.parse(localStorage.getItem("profile"));
   const [comment, setComment] = useState("");
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [comments, setComments] = useState([1, 2, 3, 4]);
   const classes = useStyles();
-  //   const commentsRef = useRef();
+  const commentsRef = useRef();
 
   const handleComment = () => {
-    //   const newComments = await dispatch(
-    //     commentPost(`${user?.result?.name}: ${comment}`, post._id)
-    //   );
-    //   setComment("");
-    //   setComments(newComments);
-    //   commentsRef.current.scrollIntoView({ behavior: "smooth" });
+    const finalComment = `${user.result.name}: ${comment}`;
+    dispatch(commentPost(finalComment, post._id));
   };
 
   return (
@@ -49,10 +45,13 @@ const CommentSection = ({ post }) => {
           <Button
             style={{ marginTop: "10px" }}
             fullWidth
+            color="primary"
             disabled={!comment}
             variant="contained"
             onClick={handleComment}
-          ></Button>
+          >
+            Comment
+          </Button>
         </div>
       </div>
     </div>
