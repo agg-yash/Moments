@@ -29,30 +29,32 @@ const CommentSection = ({ post }) => {
             </Typography>
           ))}
         </div>
-        <div style={{ width: "70%" }}>
-          <Typography gutterBottom variant="h6">
-            Write a Comment
-          </Typography>
-          <TextField
-            fullWidth
-            minRows={4}
-            variant="outlined"
-            label="Comment"
-            multiline
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
-          <Button
-            style={{ marginTop: "10px" }}
-            fullWidth
-            color="primary"
-            disabled={!comment}
-            variant="contained"
-            onClick={handleComment}
-          >
-            Comment
-          </Button>
-        </div>
+        {user?.result?.name && (
+          <div style={{ width: "70%" }}>
+            <Typography gutterBottom variant="h6">
+              Write a Comment
+            </Typography>
+            <TextField
+              fullWidth
+              minRows={4}
+              variant="outlined"
+              label="Comment"
+              multiline
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
+            <Button
+              style={{ marginTop: "10px" }}
+              fullWidth
+              color="primary"
+              disabled={!comment}
+              variant="contained"
+              onClick={handleComment}
+            >
+              Comment
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
